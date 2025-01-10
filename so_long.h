@@ -20,14 +20,17 @@
 # include <unistd.h>
 # include <math.h>
 # include "libft/libft.h"
+# include "../mlx so_long/mlx/mlx.h"
+# include "GetNextLine/get_next_line.h"
+
 
 # define UP 13
 # define LEFT 0
 # define DOWN 1
 # define RIGHT 2
 # define ESC 53
-# define IMG_W 50
-# define IMG_H 50
+# define IMG_W 32
+# define IMG_H 32
 # define WINDOW_NAME "so_long"
 
 typedef struct s_player
@@ -71,7 +74,9 @@ typedef struct s_game
 	t_player		player;
 	t_map			map;
 	t_collectible	*collectibles;
-	int				num_collectibles;
+	int				c;
+	int				p;
+	int				e;
 	t_window		window;
 	t_image			img_player_up;
 	t_image			img_player_down;

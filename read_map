@@ -1,0 +1,81 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmunoz-c <rmunoz-c@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-01-10 14:14:02 by rmunoz-c          #+#    #+#             */
+/*   Updated: 2025-01-10 14:14:02 by rmunoz-c         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "so_long.h"
+
+int	count_lines(const char *filename)
+{
+	int fd;
+	int count;
+	char buffer[1];
+	int bytes_read;
+	
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	count = 0;
+	while ((bytes_read = read(fd, buffer, 1)) > 0)
+	{
+		if (buffer[0] == '\n')
+			count++;
+	}
+	if (bytes_read == 0 && count > 0)
+		count++;
+	close(fd);
+	return (count);
+}
+
+char **fill_map_array(int fd, int n_lines)
+{
+	char	**map;
+	char	*line;
+	int		i;
+	
+	map = malloc(sizeof(char *) * (n_lines + 1));
+	if (!map)
+		return (NULL);
+	i = 0;
+	while(i < n_lines)
+	{
+		line = get_next_line(fd);
+		if (!line)
+		{
+			ft_free_array(map);
+			return (NULL);
+		}
+		map[i] = line;
+		i++;
+	}
+	map[i] = NULL;
+	return (map);
+}
+
+char **read_map(const char *filename)
+{
+	int		fd;
+	char	**map;
+	int		n_lines;
+
+	fd = open (filename, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	n_lines = count_lines(filename);
+	if (n_lines < 0)
+	{
+		close(fd);
+		return (NULL);
+	}
+	map = fill_map_array(fd, n_lines);
+	close(fd);
+	return (map);	
+}
+

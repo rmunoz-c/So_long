@@ -33,60 +33,75 @@
 # define IMG_H 32
 # define WINDOW_NAME "so_long"
 
-typedef struct s_player
-{
-	int	x;
-	int	y;
-	int	move_count;
-}	t_player;
 
 typedef struct s_map
 {
 	int		width;
 	int		height;
 	char	**map;
+	char	**copy;
 }	t_map;
 
-typedef struct s_collectible
-{
-	int	x;
-	int	y;
-	int	collected;
-}	t_collectible;
+typedef struct {
+    void	*mlx;
+    void	*win;
+	char	*filename;
+	char	*file;
+	char	*line;
+    t_map	map;
+    void	*player_img_up;
+	void	*player_img_right;
+	void	*player_img_down;
+	void	*player_img_left;
+    void	*wall_img;
+    void	*collectible_img;
+    void	*exit_img;
+    void	*background_img;
+    int		player_x;
+    int		player_y;
+    int		moves;
+    int		c;
+	int		e;
+	int		check_c;
+	int		check_e;
+	int		p;
+} t_game;
 
-typedef struct s_window
-{
-	int		width;
-	int		height;
-	void	*mlx;
-	void	*win_ptr;
-}	t_window;
+/*end_game*/
+int		close_game(t_game *game);
+void	win_game(t_game *game);
 
-typedef struct s_image
-{
-	int		width;
-	int		height;
-	void	*img;
-}	t_image;
+/*key_hook.c*/
+void	player_pos(t_game *game);
+int		update_player(int keycode, t_game *game);
 
-typedef struct s_game
-{
-	t_player		player;
-	t_map			map;
-	t_collectible	*collectibles;
-	int				c;
-	int				p;
-	int				e;
-	t_window		window;
-	t_image			img_player_up;
-	t_image			img_player_down;
-	t_image			img_player_left;
-	t_image			img_player_right;
-	t_image			img_background;
-	t_image			img_wall;
-	t_image			img_collectible;
-	t_image			img_exit;
-}	t_game;
+/*map_parse.c*/
+void	is_rectangular(t_game *game);
+void	check_walls(t_game *game);
+int		check_components(t_game *game);
+void	check_file(t_game *game);
+void	map_parse(t_game *game);
 
+/*movement.c*/
+void	move_status(t_game *game, int x, int y, int dir);
+void	move_up(t_game *game);
+void	move_down(t_game *game);
+void	move_right(t_game *game);
+void	move_left(t_game *game);
+
+/*path_finder.c*/
+void	path_traveler(t_game *game, int x, int y);
+void	path_finder(t_game *game);
+
+/*read_map*/
+void	ft_exit_free(t_game *game);
+char	read_map(t_game *game);
+
+/*set_images.c*/
+void	set_map_image(t_game *map);
+void	set_player_image(t_game *player);
+void	render_tile(t_game *game, char tile, int x, int y);
+void	render_map(t_game *game);
+void	print_moves(t_game *game);
 
 #endif

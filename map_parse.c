@@ -12,75 +12,103 @@
 
 #include "so_long.h"
 
-int	is_rectangular(char **map)
+void	is_rectangular(t_game *game)
 {
-	int	len;
-	int	i;
+	size_t	len;
+	int		x;
+	int		y;
 
-	len = ft_strlen(map[0]);
-	i = 1;
-
-	while (map[i] != NULL)
+	len = ft_strlen(game->map.map[y]);
+	x = 0;
+	y = 0;
+	while (y < game->map.height)
 	{
-		if (ft_strlen(map[i]) != len)
-			return (0);
-		i++;
+		x = ft_strlen(game->map.map[y]);
+		if (len != x)
+			ft_error("Error: Map is not rectangular!", TRUE);
+		y++;
 	}
-	return (1);
+	game->map.width = len;
 }
 
-void	check_walls(t_game *map)
+void	check_walls(t_game *game)
 {
 	int	x;
 	int	y;
 
 	x = 0;
-	while (map->map.map[0][x] != '\0' && map->map.map[0][x] == '1')
+	while (game->map.map[0][x] != '\0' && game->map.map[0][x] == '1')
 		x++;
-	if (map->map.map[0][x] != '\0')
-		ft_error("Error\n", TRUE);
+	if (game->map.map[0][x] != '\0')
+		ft_error("Error: Top wall missing!\n", TRUE);
 	y = 1;
-	while (y < map->map.height)
+	while (y < game->map.height)
 	{
-		if (map->map.map[y][0] != '1' || 
-			map->map.map[y][map->map.width - 1] != '1')
-			ft_error("Error\n", TRUE);
+		if (game->map.map[y][0] != '1' || 
+			game->map.map[y][game->map.width - 1] != '1')
+			ft_error("Error: Wall missing on side!\n", TRUE);
 		y++;
 	}
 	x = 0;
-	while (map->map.map[map->map.height - 1][x] != '1')
+	while (game->map.map[game->map.height - 1][x] != '1')
 		x++;
-	if (map->map.map[map->map.height - 1][x] != '1')
-			ft_error("Error\n", TRUE);
+	if (game->map.map[game->map.height - 1][x] != '1')
+			ft_error("Error: Bottom wall missing!\n", TRUE);
 }
 
-int check_components(t_game *map)
+int	check_components(t_game *game)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	while (y < map->map.height)
+	while (y < game->map.height)
 	{
-		while (x < map->map.width)
+		while (x < game->map.width)
 		{
-			if (map->map.map[x][y] == 'P')
-				map->p += 1;
-			else if (map->map.map[x][y] == 'E')
-				map->e += 1;
-			else if (map->map.map[x][y] == 'C')
-				map->c += 1;
-			else if (map->map.map[x][y] == '0' || map->map.map[x][y] == '1')
+			if (game->map.map[x][y] == 'P')
+				game->p += 1;
+			else if (game->map.map[x][y] == 'E')
+				game->e += 1;
+			else if (game->map.map[x][y] == 'C')
+				game->c += 1;
+			else if (game->map.map[x][y] == '0' || game->map.map[x][y] == '1')
 				;
 			else
-				ft_error("Error\n", TRUE);
+				ft_error("Error: Invalid character detected!\n", TRUE);
 			x++;
 		}
 		x = 0;
 		y++;
 	}
-	if (map->p != 1 || map->e < 1 || map->c < 1)
-		ft_error("Error\n", TRUE);
+	if (game->p != 1 || game->e < 1 || game->c < 1)
+		ft_error("Error: Missing components!\n", TRUE);
 }
 
+void	check_file(t_game *game)
+{
+	size_t	len;
 
+	len = ft_strlen(game->filename);
+	if (game->filename[len - 1] != 'r')
+		ft_error("Error: Wrong file, not .BER extension!", TRUE);
+	if (game->filename[len - 2] != 'e')
+		ft_error("Error: Wrong file, not .BER extension!", TRUE);
+	if (game->filename[len - 3] != 'b')
+		ft_error("Error: Wrong file, not .BER extension!", TRUE);
+	if (game->filename[len - 4] != '.')
+		ft_error("Error: Wrong file, not .BER extension!", TRUE);
+	if (!ft_strnstr(game->filename, ".ber", ft_strlen(game->filename)))
+		ft_error("Error: Wrong file, not .BER extension!", TRUE);
+}
+
+void	map_parse(t_game *game)
+{
+	check_file(game);
+	read_map(game);
+	is_rectangular(game);
+	check_walls(game);
+	check_components(game);
+	path_finder(game);
+	ft_free_array(game->map.copy);
+}

@@ -12,12 +12,39 @@
 
 #include "so_long.h"
 
-int update_player(int keycode, t_game *game)
+void	player_pos(t_game *game)
 {
-	if (keycode == UP)
+	game->player_x = 0;
+	game->player_y = 0;
+	while (game->player_y < game->map.height)
 	{
-		game->player.y -= 1;
-		mlx_put_image_to_window(game->window.mlx, game->window.win_ptr,
-		game->img_player_up.img, game->player.x * IMG_W, game->player.y * IMG_H);
+		while (game->player_x < game->map.width)
+		{
+			if (game->map.map[game->player_y][game->player_x] == 'P')
+				break ;
+			game->player_x++;
+		}
+		if (game->map.map[game->player_y][game->player_x] == 'P')
+			break ;
+		game->player_x = 0;
+		game->player_y++;
 	}
+}
+
+int	update_player(int keycode, t_game *game)
+{
+	player_pos(game);
+	if (keycode == ESC)
+		return (0);
+	else if (game->e == 1)
+		return (0);
+	else if(keycode == UP)
+		move_up(game);
+	else if(keycode == DOWN)
+		move_down(game);
+	else if(keycode == LEFT)
+		move_left(game);
+	else if(keycode == RIGHT)
+		move_right(game);
+	return (0);		
 }

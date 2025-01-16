@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 void	path_traveler(t_game *game, int x, int y)
 {
@@ -31,10 +31,10 @@ void	path_traveler(t_game *game, int x, int y)
 	}
 	else
 		return ;
-	path_traveler (x + 1, y, game);
-	path_traveler (x - 1, y, game);
-	path_traveler (x, y + 1, game);
-	path_traveler (x, y - 1, game);
+	path_traveler (game, x + 1, y);
+	path_traveler (game, x - 1, y);
+	path_traveler (game, x, y + 1);
+	path_traveler (game, x, y - 1);
 }
 
 void	path_finder(t_game *game)
@@ -42,11 +42,11 @@ void	path_finder(t_game *game)
 	game->check_c = game->c;
 	game->check_e = game->e;
 	player_pos(game);
-	path_traveler(game->player_x, game->player_y, game);
+	path_traveler(game, game->player_x, game->player_y);
 	if (game->check_c != 0 || game->check_e >= game->e)
 	{
-		ft_free_array(game->map.map);
-		ft_free_array(game->map.copy);
+		ft_free_game(game->map.map, game->map.height);
+		ft_free_game(game->map.copy, game->map.height);
 		ft_error("Error: No valid path found!\n", TRUE);
 	}
 }

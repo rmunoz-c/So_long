@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 void	ft_exit_free(t_game *game)
 {

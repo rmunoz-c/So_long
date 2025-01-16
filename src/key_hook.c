@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 void	player_pos(t_game *game)
 {

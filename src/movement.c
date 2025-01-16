@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 void	move_status(t_game *game, int x, int y, int dir)
 {

@@ -12,7 +12,14 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+# define MAX_FD 1024
 
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
 # include <stdint.h>
 # include <string.h>
 # include <unistd.h>
@@ -67,6 +74,8 @@ int		ft_arraylen(char **a);
 int		ft_strcmp(char *s1, char *s2);
 void	ft_quicksort(int *array, int low, int high);
 int		ft_index(int n, int *array);
+char	*ft_strjoinfree(char *s1, char *s2);
+
 
 typedef struct s_list
 {
@@ -83,5 +92,8 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+char	*get_next_line(int fd);
+char	*get_next_line_bonus(int fd);
 
 #endif

@@ -19,10 +19,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <math.h>
-# include "libft/libft.h"
-# include "../mlx so_long/mlx/mlx.h"
-# include "GetNextLine/get_next_line.h"
-
+# include "../libft/libft.h"
+# include "../../mlx so_long/mlx/mlx.h"
 
 # define UP 13
 # define LEFT 0
@@ -68,6 +66,7 @@ typedef struct {
 } t_game;
 
 /*end_game*/
+int		ft_free_game(char **game, int i);
 int		close_game(t_game *game);
 void	win_game(t_game *game);
 
@@ -78,7 +77,7 @@ int		update_player(int keycode, t_game *game);
 /*map_parse.c*/
 void	is_rectangular(t_game *game);
 void	check_walls(t_game *game);
-int		check_components(t_game *game);
+void	check_components(t_game *game);
 void	check_file(t_game *game);
 void	map_parse(t_game *game);
 
@@ -95,7 +94,7 @@ void	path_finder(t_game *game);
 
 /*read_map*/
 void	ft_exit_free(t_game *game);
-char	read_map(t_game *game);
+void	read_map(t_game *game);
 
 /*set_images.c*/
 void	set_map_image(t_game *map);

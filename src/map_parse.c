@@ -10,17 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 void	is_rectangular(t_game *game)
 {
-	size_t	len;
+	int		len;
 	int		x;
 	int		y;
 
-	len = ft_strlen(game->map.map[y]);
 	x = 0;
 	y = 0;
+	len = ft_strlen(game->map.map[y]);
 	while (y < game->map.height)
 	{
 		x = ft_strlen(game->map.map[y]);
@@ -56,7 +56,7 @@ void	check_walls(t_game *game)
 			ft_error("Error: Bottom wall missing!\n", TRUE);
 }
 
-int	check_components(t_game *game)
+void	check_components(t_game *game)
 {
 	int	x;
 	int	y;
@@ -64,21 +64,21 @@ int	check_components(t_game *game)
 	y = 0;
 	while (y < game->map.height)
 	{
+		x = 0;
 		while (x < game->map.width)
 		{
-			if (game->map.map[x][y] == 'P')
+			if (game->map.map[y][x] == 'P')
 				game->p += 1;
-			else if (game->map.map[x][y] == 'E')
+			else if (game->map.map[y][x] == 'E')
 				game->e += 1;
-			else if (game->map.map[x][y] == 'C')
+			else if (game->map.map[y][x] == 'C')
 				game->c += 1;
-			else if (game->map.map[x][y] == '0' || game->map.map[x][y] == '1')
+			else if (game->map.map[y][x] == '0' || game->map.map[y][x] == '1')
 				;
 			else
 				ft_error("Error: Invalid character detected!\n", TRUE);
 			x++;
 		}
-		x = 0;
 		y++;
 	}
 	if (game->p != 1 || game->e < 1 || game->c < 1)

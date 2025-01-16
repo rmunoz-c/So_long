@@ -10,12 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h" 
+
+int	ft_free_game(char **game, int i)
+{
+	while (i > 0)
+		free(game[--i]);
+	free(game);
+	return (0);
+}
 
 int	close_game(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->win);
-	ft_free_array(game);
+	ft_free_game(game->map.map, game->map.height);
 	exit(EXIT_SUCCESS);
 	return(0);
 }

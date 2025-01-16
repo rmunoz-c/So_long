@@ -59,6 +59,7 @@ SRC	=		ft_bzero.c \
 			ft_strcmp.c \
 			ft_quicksort.c \
 			ft_index.c \
+			ft_strjoinfree.c \
 			ft_lstnew_bonus.c \
 			ft_lstadd_front_bonus.c \
 			ft_lstsize_bonus.c \
@@ -68,6 +69,8 @@ SRC	=		ft_bzero.c \
 			ft_lstclear_bonus.c \
 			ft_lstiter_bonus.c \
 			ft_lstmap_bonus.c \
+			get_next_line.c \
+			get_next_line_bonus.c \
 
 OBJ= $(SRC:.c=.o) 
 

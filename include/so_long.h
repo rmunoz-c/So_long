@@ -20,15 +20,17 @@
 # include <unistd.h>
 # include <math.h>
 # include "../libft/libft.h"
-# include "../../mlx so_long/mlx/mlx.h"
+# include "../mlx/mlx.h"
+# include <X11/keysym.h>
+# include <X11/X.h>
 
-# define UP 13
-# define LEFT 0
-# define DOWN 1
-# define RIGHT 2
-# define ESC 53
-# define IMG_W 32
-# define IMG_H 32
+# define UP 119
+# define LEFT 97
+# define DOWN 115
+# define RIGHT 100
+# define ESC 65307
+# define IMG_W 150
+# define IMG_H 150
 # define WINDOW_NAME "so_long"
 
 
@@ -74,6 +76,10 @@ void	win_game(t_game *game);
 void	player_pos(t_game *game);
 int		update_player(int keycode, t_game *game);
 
+/*main.c*/
+void	game_initializer(t_game *game, char **argv);
+int 	main(int argc, char **argv);
+
 /*map_parse.c*/
 void	is_rectangular(t_game *game);
 void	check_walls(t_game *game);
@@ -85,8 +91,8 @@ void	map_parse(t_game *game);
 void	move_status(t_game *game, int x, int y, int dir);
 void	move_up(t_game *game);
 void	move_down(t_game *game);
-void	move_right(t_game *game);
 void	move_left(t_game *game);
+void	move_right(t_game *game);
 
 /*path_finder.c*/
 void	path_traveler(t_game *game, int x, int y);
@@ -99,7 +105,7 @@ void	read_map(t_game *game);
 /*set_images.c*/
 void	set_map_image(t_game *map);
 void	set_player_image(t_game *player);
-void	render_tile(t_game *game, char tile, int x, int y);
+void	render_tile(t_game *game, int x, int y);
 void	render_map(t_game *game);
 void	print_moves(t_game *game);
 

@@ -50,10 +50,12 @@ void	check_walls(t_game *game)
 		y++;
 	}
 	x = 0;
-	while (game->map.map[game->map.height - 1][x] != '1')
-		x++;
-	if (game->map.map[game->map.height - 1][x] != '1')
+	while (game->map.map[game->map.height - 1][x] != '\0')
+	{
+		if (game->map.map[game->map.height - 1][x] != '1')
 			ft_error("Error: Bottom wall missing!\n", TRUE);
+		x++;
+	}
 }
 
 void	check_components(t_game *game)

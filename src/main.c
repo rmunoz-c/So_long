@@ -12,33 +12,36 @@
 
 #include "../include/so_long.h"
 
-void test_parse(t_game *game)
+void	game_initializer(t_game *game, char **argv)
 {
-    printf("Test 1: Mapa válido\n");
-    game->filename = "src/maps/map1.ber";
-    read_map(game);
-    check_file(game);
-    is_rectangular(game);
-    check_walls(game);
-    check_components(game);
-    printf("Mapa válido completado.\n");
-    ft_free_game(game->map.map, game->map.height);  
-
-    printf("\nTest 2: Mapa con paredes faltantes\n");
-    game->filename = "src/maps/map_missing_top_wall.ber";
-    read_map(game);
-    check_file(game);
-    is_rectangular(game);
-    check_walls(game);
-    check_components(game);
-    printf("Este mensaje no debería aparecer si check_walls falla.\n");
-    ft_free_game(game->map.map, game->map.height);
+	game->filename = argv[1];
+	game->moves = 0;
+	game->e = 0;
+	game->c = 0;
+	game->p = 0;
+	game->map.height = 0;
+	game->player_y = 0;
+	game->player_x = 0;
+	game->e = 0;
 }
 
-int main()
+int main(int argc, char **argv)
 {
     t_game game;
 
-    test_parse(&game);
-    return 0;
+    if (argc == 2)
+	{
+		game_initializer(&game, argv);
+		map_parse(&game);
+		game.mlx = mlx_init();
+		game.win = mlx_new_window(game.mlx, game.map.width * IMG_W,
+									game.map.height * IMG_H, WINDOW_NAME);
+		set_map_image(&game);
+		render_map(&game);
+		mlx_hook(game.win, 17, 0, close_game, &game);
+		mlx_key_hook(game.win, update_player, &game);
+		mlx_loop(game.mlx);
+	}
+	ft_error("Error: Try with ./so_long 'map_file.ber'\n", TRUE);
+    return (EXIT_FAILURE);
 }

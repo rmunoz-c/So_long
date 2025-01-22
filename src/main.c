@@ -37,9 +37,9 @@ int main(int argc, char **argv)
 		game.win = mlx_new_window(game.mlx, game.map.width * IMG_W,
 									game.map.height * IMG_H, WINDOW_NAME);
 		set_map_image(&game);
-		render_map(&game);
+		mlx_hook(game.win, KeyPress, KeyPressMask ,update_player, &game);
 		mlx_hook(game.win, 17, 0, close_game, &game);
-		mlx_key_hook(game.win, update_player, &game);
+		render_map(&game);
 		mlx_loop(game.mlx);
 	}
 	ft_error("Error: Try with ./so_long 'map_file.ber'\n", TRUE);

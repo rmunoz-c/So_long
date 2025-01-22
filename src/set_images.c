@@ -62,12 +62,13 @@ void	render_tile(t_game *game, int x, int y)
 		mlx_put_image_to_window(game->mlx, game->win, game->player_img_right,
 								x, y);
 	else if (tile == 'E')
-		 mlx_put_image_to_window(game->mlx, game->win, game->exit_img, 
+		mlx_put_image_to_window(game->mlx, game->win, game->exit_img, 
 		 						x, y);
 	else if (tile == '1')
 		mlx_put_image_to_window(game->mlx, game->win, game->wall_img, 
 								x, y);
 }
+	
 
 void	render_map(t_game *game)
 {

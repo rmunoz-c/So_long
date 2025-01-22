@@ -36,7 +36,7 @@ void	move_up(t_game *game)
 {
 	int	x;
 	int	y;
-
+	
 	x = game->player_x;
 	y = game->player_y;
 	if (y > 0 && game->map.map[y - 1][x] != '1')
@@ -51,7 +51,7 @@ void	move_up(t_game *game)
 		y--;
 		mlx_put_image_to_window(game->mlx, game->win, game->background_img, 
 								x * IMG_W, y * IMG_H);
-		mlx_put_image_to_window(game->mlx, game->win, game->player_img_right, 
+		mlx_put_image_to_window(game->mlx, game->win, game->player_img_up, 
 								x * IMG_W, y * IMG_H);
 		game->map.map[y][x] = 'P';
 		game->player_y = y;
@@ -78,7 +78,7 @@ void	move_down(t_game *game)
 		y++;
 		mlx_put_image_to_window(game->mlx, game->win, game->background_img, 
 								x * IMG_W, y * IMG_H);
-		mlx_put_image_to_window(game->mlx, game->win, game->player_img_left, 
+		mlx_put_image_to_window(game->mlx, game->win, game->player_img_down, 
 								x * IMG_W, y * IMG_H);
 		game->map.map[y][x] = 'P';
 		game->player_y = y;

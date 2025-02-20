@@ -53,4 +53,3 @@ void	read_map(t_game *game)
 		ft_exit_free(game);
 	free(game->file);
 }
-

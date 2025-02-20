@@ -76,7 +76,6 @@ void	ft_quicksort(int *array, int low, int high);
 int		ft_index(int n, int *array);
 char	*ft_strjoinfree(char *s1, char *s2);
 
-
 typedef struct s_list
 {
 	void			*content;

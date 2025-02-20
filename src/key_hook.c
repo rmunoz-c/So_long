@@ -34,15 +34,15 @@ void	player_pos(t_game *game)
 int	update_player(int keycode, t_game *game)
 {
 	player_pos(game);
-    if (keycode == XK_Escape)
-        return (close_game(game));
-    else if (keycode == UP || keycode == XK_Up) // Tecla W o flecha arriba
-        move_up(game);
-    else if (keycode == DOWN || keycode == XK_Down) // Tecla S o flecha abajo
-        move_down(game);
-    else if (keycode == LEFT || keycode == XK_Left) // Tecla A o flecha izquierda
-        move_left(game);
-    else if (keycode == RIGHT || keycode == XK_Right) // Tecla D o flecha derecha
-        move_right(game);
-    return (0);  
+	if (keycode == XK_Escape)
+		return (close_game(game));
+	else if (keycode == UP || keycode == XK_Up)
+		move_up(game);
+	else if (keycode == DOWN || keycode == XK_Down)
+		move_down(game);
+	else if (keycode == LEFT || keycode == XK_Left)
+		move_left(game);
+	else if (keycode == RIGHT || keycode == XK_Right)
+		move_right(game);
+	return (0);
 }

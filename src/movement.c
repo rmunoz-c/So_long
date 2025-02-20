@@ -23,20 +23,19 @@ void	move_status(t_game *game, int x, int y, int dir)
 	if (dir == RIGHT)
 		x += 1;
 	if (game->map.map[y][x] == 'E' && game->c == 0)
-		return(win_game(game));
+		return (win_game(game));
 	if (game->map.map[y][x] == 'C')
 	{
 		game->map.map[y][x] = '0';
 		game->c--;
 	}
-
 }
 
 void	move_up(t_game *game)
 {
 	int	x;
 	int	y;
-	
+
 	x = game->player_x;
 	y = game->player_y;
 	if (y > 0 && game->map.map[y - 1][x] != '1')
@@ -45,14 +44,14 @@ void	move_up(t_game *game)
 		if (game->map.map[y - 1][x] == 'E' && (game->c != 0 || game->e == 1))
 			return ;
 		game->moves++;
-		mlx_put_image_to_window(game->mlx, game->win, game->background_img, 
-								x * IMG_W, y * IMG_H);
+		mlx_put_image_to_window(game->mlx, game->win, game->background_img,
+			x * IMG_W, y * IMG_H);
 		game->map.map[y][x] = '0';
 		y--;
-		mlx_put_image_to_window(game->mlx, game->win, game->background_img, 
-								x * IMG_W, y * IMG_H);
-		mlx_put_image_to_window(game->mlx, game->win, game->player_img_up, 
-								x * IMG_W, y * IMG_H);
+		mlx_put_image_to_window(game->mlx, game->win, game->background_img,
+			x * IMG_W, y * IMG_H);
+		mlx_put_image_to_window(game->mlx, game->win, game->player_img_up,
+			x * IMG_W, y * IMG_H);
 		game->map.map[y][x] = 'P';
 		game->player_y = y;
 		print_moves(game);
@@ -72,14 +71,14 @@ void	move_down(t_game *game)
 		if (game->map.map[y + 1][x] == 'E' && (game->c != 0 || game->e == 1))
 			return ;
 		game->moves++;
-		mlx_put_image_to_window(game->mlx, game->win, game->background_img, 
-								x * IMG_W, y * IMG_H);
+		mlx_put_image_to_window(game->mlx, game->win, game->background_img,
+			x * IMG_W, y * IMG_H);
 		game->map.map[y][x] = '0';
 		y++;
-		mlx_put_image_to_window(game->mlx, game->win, game->background_img, 
-								x * IMG_W, y * IMG_H);
-		mlx_put_image_to_window(game->mlx, game->win, game->player_img_down, 
-								x * IMG_W, y * IMG_H);
+		mlx_put_image_to_window(game->mlx, game->win, game->background_img,
+			x * IMG_W, y * IMG_H);
+		mlx_put_image_to_window(game->mlx, game->win, game->player_img_down,
+			x * IMG_W, y * IMG_H);
 		game->map.map[y][x] = 'P';
 		game->player_y = y;
 		print_moves(game);
@@ -99,14 +98,14 @@ void	move_right(t_game *game)
 		if (game->map.map[y][x + 1] == 'E' && (game->c != 0 || game->e == 1))
 			return ;
 		game->moves++;
-		mlx_put_image_to_window(game->mlx, game->win, game->background_img, 
-								x * IMG_W, y * IMG_H);
+		mlx_put_image_to_window(game->mlx, game->win, game->background_img,
+			x * IMG_W, y * IMG_H);
 		game->map.map[y][x] = '0';
 		x++;
-		mlx_put_image_to_window(game->mlx, game->win, game->background_img, 
-								x * IMG_W, y * IMG_H);
-		mlx_put_image_to_window(game->mlx, game->win, game->player_img_right, 
-								x * IMG_W, y * IMG_H);
+		mlx_put_image_to_window(game->mlx, game->win, game->background_img,
+			x * IMG_W, y * IMG_H);
+		mlx_put_image_to_window(game->mlx, game->win, game->player_img_right,
+			x * IMG_W, y * IMG_H);
 		game->map.map[y][x] = 'P';
 		game->player_x = x;
 		print_moves(game);
@@ -126,14 +125,14 @@ void	move_left(t_game *game)
 		if (game->map.map[y][x - 1] == 'E' && (game->c != 0 || game->e == 1))
 			return ;
 		game->moves++;
-		mlx_put_image_to_window(game->mlx, game->win, game->background_img, 
-								x * IMG_W, y * IMG_H);
+		mlx_put_image_to_window(game->mlx, game->win, game->background_img,
+			x * IMG_W, y * IMG_H);
 		game->map.map[y][x] = '0';
 		x--;
-		mlx_put_image_to_window(game->mlx, game->win, game->background_img, 
-								x * IMG_W, y * IMG_H);
-		mlx_put_image_to_window(game->mlx, game->win, game->player_img_left, 
-								x * IMG_W, y * IMG_H);
+		mlx_put_image_to_window(game->mlx, game->win, game->background_img,
+			x * IMG_W, y * IMG_H);
+		mlx_put_image_to_window(game->mlx, game->win, game->player_img_left,
+			x * IMG_W, y * IMG_H);
 		game->map.map[y][x] = 'P';
 		game->player_x = x;
 		print_moves(game);

@@ -44,7 +44,7 @@ void	check_walls(t_game *game)
 	y = 1;
 	while (y < game->map.height)
 	{
-		if (game->map.map[y][0] != '1' || 
+		if (game->map.map[y][0] != '1' ||
 			game->map.map[y][game->map.width - 1] != '1')
 			ft_error("Error: Wall missing on side!\n", TRUE);
 		y++;

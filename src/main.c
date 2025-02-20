@@ -25,23 +25,23 @@ void	game_initializer(t_game *game, char **argv)
 	game->e = 0;
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_game game;
+	t_game	game;
 
-    if (argc == 2)
+	if (argc == 2)
 	{
 		game_initializer(&game, argv);
 		map_parse(&game);
 		game.mlx = mlx_init();
 		game.win = mlx_new_window(game.mlx, game.map.width * IMG_W,
-									game.map.height * IMG_H, WINDOW_NAME);
+				game.map.height * IMG_H, WINDOW_NAME);
 		set_map_image(&game);
-		mlx_hook(game.win, KeyPress, KeyPressMask ,update_player, &game);
+		mlx_hook(game.win, KeyPress, KeyPressMask, update_player, &game);
 		mlx_hook(game.win, 17, 0, close_game, &game);
 		render_map(&game);
 		mlx_loop(game.mlx);
 	}
 	ft_error("Error: Try with ./so_long 'map_file.ber'\n", TRUE);
-    return (EXIT_FAILURE);
+	return (EXIT_FAILURE);
 }

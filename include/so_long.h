@@ -33,7 +33,6 @@
 # define IMG_H 150
 # define WINDOW_NAME "so_long"
 
-
 typedef struct s_map
 {
 	int		width;
@@ -42,30 +41,31 @@ typedef struct s_map
 	char	**copy;
 }	t_map;
 
-typedef struct {
-    void	*mlx;
-    void	*win;
+typedef struct s_game
+{
+	void	*mlx;
+	void	*win;
 	char	*filename;
 	char	*file;
 	char	*line;
-    t_map	map;
-    void	*player_img_up;
+	t_map	map;
+	void	*player_img_up;
 	void	*player_img_right;
 	void	*player_img_down;
 	void	*player_img_left;
-    void	*wall_img;
-    void	*collectible_img;
-    void	*exit_img;
-    void	*background_img;
-    int		player_x;
-    int		player_y;
-    int		moves;
-    int		c;
+	void	*wall_img;
+	void	*collectible_img;
+	void	*exit_img;
+	void	*background_img;
+	int		player_x;
+	int		player_y;
+	int		moves;
+	int		c;
 	int		e;
 	int		check_c;
 	int		check_e;
 	int		p;
-} t_game;
+}	t_game;
 
 /*end_game*/
 int		ft_free_game(char **game, int i);
@@ -78,7 +78,7 @@ int		update_player(int keycode, t_game *game);
 
 /*main.c*/
 void	game_initializer(t_game *game, char **argv);
-int 	main(int argc, char **argv);
+int		main(int argc, char **argv);
 
 /*map_parse.c*/
 void	is_rectangular(t_game *game);

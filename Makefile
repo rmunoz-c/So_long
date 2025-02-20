@@ -57,6 +57,11 @@ fclean: clean
 
 re: fclean all
 
+norm: 	
+	@norminette include
+	@norminette libft
+	@norminette $(SRC)
+
 .DEFAULT_GOAL: all
 
 .PHONY: all clean fclean re

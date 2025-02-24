@@ -32,6 +32,7 @@ void	win_game(t_game *game)
 {
 	game->e = 1;
 	game->moves++;
+	print_moves(game);
 	mlx_clear_window(game->mlx, game->win);
 	mlx_string_put(game->mlx, game->win, game->map.width / 2 * IMG_W,
 		game->map.height / 2 * IMG_H, 0x9EFF9E, "VICTORY IS YOURS");

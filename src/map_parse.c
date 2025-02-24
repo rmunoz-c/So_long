@@ -25,7 +25,7 @@ void	is_rectangular(t_game *game)
 	{
 		x = ft_strlen(game->map.map[y]);
 		if (len != x)
-			ft_error("Error: Map is not rectangular!", TRUE);
+			ft_error("Error: Map is not rectangular!\n", TRUE);
 		y++;
 	}
 	game->map.width = len;

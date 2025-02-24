@@ -23,6 +23,16 @@ int	ft_free_game(char **game, int i)
 int	close_game(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_image(game->mlx, game->background_img);
+	mlx_destroy_image(game->mlx, game->collectible_img);
+	mlx_destroy_image(game->mlx, game->wall_img);
+	mlx_destroy_image(game->mlx, game->player_img_down);
+	mlx_destroy_image(game->mlx, game->player_img_left);
+	mlx_destroy_image(game->mlx, game->player_img_right);
+	mlx_destroy_image(game->mlx, game->player_img_up);
+	mlx_destroy_image(game->mlx, game->exit_img);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
 	ft_free_game(game->map.map, game->map.height);
 	exit(EXIT_SUCCESS);
 	return (0);
@@ -32,11 +42,12 @@ void	win_game(t_game *game)
 {
 	game->e = 1;
 	game->moves++;
+	print_moves(game);
 	mlx_clear_window(game->mlx, game->win);
 	mlx_string_put(game->mlx, game->win, game->map.width / 2 * IMG_W,
 		game->map.height / 2 * IMG_H, 0x9EFF9E, "VICTORY IS YOURS");
 	write (1, "\n", 1);
 	write (1, "\x1B[32m", 5);
-	write (1, "¡¡VICTORY IS YOURS!!", 21);
+	write (1, "¡¡VICTORY IS YOURS!!\n", 23);
 	write(1, "\x1b[0m", 5);
 }

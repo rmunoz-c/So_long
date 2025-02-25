@@ -83,8 +83,8 @@ void	check_components(t_game *game)
 		}
 		y++;
 	}
-	if (game->p != 1 || game->e < 1 || game->c < 1)
-		free_and_exit(game, "Error: Missing components!\n");
+	if (game->p != 1 || game->e != 1 || game->c < 1)
+		free_and_exit(game, "Error: Wrong components!\n");
 }
 
 void	check_file(t_game *game)

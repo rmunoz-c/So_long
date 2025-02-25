@@ -25,6 +25,16 @@ void	ft_exit_free(t_game *game)
 	exit(EXIT_FAILURE);
 }
 
+void	close_map(t_game *game, int fd)
+{
+	close(fd);
+	game->map.map = ft_split(game->file, '\n');
+	game->map.copy = ft_split(game->file, '\n');
+	if (!game->map.map || !game->map.copy)
+		ft_exit_free(game);
+	free(game->file);
+}
+
 void	read_map(t_game *game)
 {
 	int		fd;
@@ -40,16 +50,16 @@ void	read_map(t_game *game)
 		game->line = get_next_line(fd);
 		if (game->line == NULL)
 			break ;
+		if (!ft_strncmp(game->line, "\n", 2))
+		{
+			free(game->line);
+			continue ;
+		}
 		game->file = ft_strjoinfree(game->file, game->line);
 		free(game->line);
 		if (!game->file)
 			ft_exit_free(game);
 		game->map.height++;
 	}
-	close(fd);
-	game->map.map = ft_split(game->file, '\n');
-	game->map.copy = ft_split(game->file, '\n');
-	if (!game->map.map || !game->map.copy)
-		ft_exit_free(game);
-	free(game->file);
+	close_map(game, fd);
 }

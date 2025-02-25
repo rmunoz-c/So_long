@@ -70,6 +70,7 @@ typedef struct s_game
 /*end_game*/
 int		ft_free_game(char **game, int i);
 int		close_game(t_game *game);
+void	free_and_exit(t_game *game, char *error_message);
 void	win_game(t_game *game);
 
 /*key_hook.c*/

@@ -22,7 +22,8 @@ void	game_initializer(t_game *game, char **argv)
 	game->map.height = 0;
 	game->player_y = 0;
 	game->player_x = 0;
-	game->e = 0;
+	game->check_e = 0;
+	game->mlx = NULL;
 }
 
 int	main(int argc, char **argv)

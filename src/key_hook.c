@@ -36,6 +36,8 @@ int	update_player(int keycode, t_game *game)
 	player_pos(game);
 	if (keycode == XK_Escape)
 		return (close_game(game));
+	if (game->check_e == 1)
+		return (0);
 	else if (keycode == UP || keycode == XK_Up)
 		move_up(game);
 	else if (keycode == DOWN || keycode == XK_Down)

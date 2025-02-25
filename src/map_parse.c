@@ -25,7 +25,7 @@ void	is_rectangular(t_game *game)
 	{
 		x = ft_strlen(game->map.map[y]);
 		if (len != x)
-			ft_error("Error: Map is not rectangular!\n", TRUE);
+			free_and_exit(game, "Error\n Map is not rectangular!\n");
 		y++;
 	}
 	game->map.width = len;
@@ -40,20 +40,20 @@ void	check_walls(t_game *game)
 	while (game->map.map[0][x] != '\0' && game->map.map[0][x] == '1')
 		x++;
 	if (game->map.map[0][x] != '\0')
-		ft_error("Error: Top wall missing!\n", TRUE);
+		free_and_exit(game, "Error\n Top wall missing!\n");
 	y = 1;
 	while (y < game->map.height)
 	{
 		if (game->map.map[y][0] != '1' ||
 			game->map.map[y][game->map.width - 1] != '1')
-			ft_error("Error: Wall missing on side!\n", TRUE);
+			free_and_exit(game, "Error\n Wall missing on side!\n");
 		y++;
 	}
 	x = 0;
 	while (game->map.map[game->map.height - 1][x] != '\0')
 	{
 		if (game->map.map[game->map.height - 1][x] != '1')
-			ft_error("Error: Bottom wall missing!\n", TRUE);
+			free_and_exit(game, "Error\n Bottom wall missing!\n");
 		x++;
 	}
 }
@@ -78,13 +78,13 @@ void	check_components(t_game *game)
 			else if (game->map.map[y][x] == '0' || game->map.map[y][x] == '1')
 				;
 			else
-				ft_error("Error: Invalid character detected!\n", TRUE);
+				free_and_exit(game, "Error\n Invalid character detected!\n");
 			x++;
 		}
 		y++;
 	}
-	if (game->p != 1 || game->e < 1 || game->c < 1)
-		ft_error("Error: Missing components!\n", TRUE);
+	if (game->p != 1 || game->e != 1 || game->c < 1)
+		free_and_exit(game, "Error\n Wrong components!\n");
 }
 
 void	check_file(t_game *game)
@@ -93,15 +93,15 @@ void	check_file(t_game *game)
 
 	len = ft_strlen(game->filename);
 	if (game->filename[len - 1] != 'r')
-		ft_error("Error: Wrong file, not .BER extension!", TRUE);
+		ft_error("Error\n Wrong file, not .BER extension!", TRUE);
 	if (game->filename[len - 2] != 'e')
-		ft_error("Error: Wrong file, not .BER extension!", TRUE);
+		ft_error("Error\n Wrong file, not .BER extension!", TRUE);
 	if (game->filename[len - 3] != 'b')
-		ft_error("Error: Wrong file, not .BER extension!", TRUE);
+		ft_error("Error\n Wrong file, not .BER extension!", TRUE);
 	if (game->filename[len - 4] != '.')
-		ft_error("Error: Wrong file, not .BER extension!", TRUE);
+		ft_error("Error\n Wrong file, not .BER extension!", TRUE);
 	if (!ft_strnstr(game->filename, ".ber", ft_strlen(game->filename)))
-		ft_error("Error: Wrong file, not .BER extension!", TRUE);
+		ft_error("Error\n Wrong file, not .BER extension!", TRUE);
 }
 
 void	map_parse(t_game *game)

@@ -22,7 +22,8 @@ void	game_initializer(t_game *game, char **argv)
 	game->map.height = 0;
 	game->player_y = 0;
 	game->player_x = 0;
-	game->e = 0;
+	game->check_e = 0;
+	game->mlx = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -42,6 +43,6 @@ int	main(int argc, char **argv)
 		render_map(&game);
 		mlx_loop(game.mlx);
 	}
-	ft_error("Error: Try with ./so_long 'map_file.ber'\n", TRUE);
+	ft_error("Error\n Try with ./so_long 'map_file.ber'\n", TRUE);
 	return (EXIT_FAILURE);
 }

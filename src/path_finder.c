@@ -47,6 +47,6 @@ void	path_finder(t_game *game)
 	{
 		ft_free_game(game->map.map, game->map.height);
 		ft_free_game(game->map.copy, game->map.height);
-		ft_error("Error: No valid path found!\n", TRUE);
+		free_and_exit(game, "Error\n No valid path found!\n");
 	}
 }

@@ -38,9 +38,25 @@ int	close_game(t_game *game)
 	return (0);
 }
 
+void	free_and_exit(t_game *game, char *error_message)
+{
+	if (game->mlx)
+	{
+		if (game->win)
+			mlx_destroy_window(game->mlx, game->win);
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+	ft_free_game(game->map.map, game->map.height);
+	ft_free_game(game->map.copy, game->map.height);
+	if (error_message)
+		ft_error(error_message, TRUE);
+	exit(EXIT_FAILURE);
+}
+
 void	win_game(t_game *game)
 {
-	game->e = 1;
+	game->check_e = 1;
 	game->moves++;
 	print_moves(game);
 	mlx_clear_window(game->mlx, game->win);

@@ -44,7 +44,7 @@ void	read_map(t_game *game)
 	game->file = NULL;
 	fd = open(game->filename, O_RDONLY);
 	if (fd == -1)
-		ft_error("Error: Failed opening the file\n", TRUE);
+		ft_error("Error\n Failed opening the file\n", TRUE);
 	while (game->line)
 	{
 		game->line = get_next_line(fd);

@@ -43,6 +43,6 @@ int	main(int argc, char **argv)
 		render_map(&game);
 		mlx_loop(game.mlx);
 	}
-	ft_error("Error: Try with ./so_long 'map_file.ber'\n", TRUE);
+	ft_error("Error\n Try with ./so_long 'map_file.ber'\n", TRUE);
 	return (EXIT_FAILURE);
 }

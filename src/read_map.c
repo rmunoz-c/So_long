@@ -15,9 +15,9 @@
 void	ft_exit_free(t_game *game)
 {
 	if (game->map.map)
-		free (game->map.map);
+		ft_free_game(game->map.map, game->map.height);
 	if (game->map.copy)
-		free (game->map.copy);
+		ft_free_game(game->map.copy, game->map.height);
 	if (game->file)
 		free (game->file);
 	if (game->line)
@@ -50,11 +50,6 @@ void	read_map(t_game *game)
 		game->line = get_next_line(fd);
 		if (game->line == NULL)
 			break ;
-		if (!ft_strncmp(game->line, "\n", 2))
-		{
-			free(game->line);
-			continue ;
-		}
 		game->file = ft_strjoinfree(game->file, game->line);
 		free(game->line);
 		if (!game->file)

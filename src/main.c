@@ -15,21 +15,22 @@
 void	game_initializer(t_game *game, char **argv)
 {
 	game->filename = argv[1];
-	game->moves = 0;
-	game->e = 0;
-	game->c = 0;
-	game->p = 0;
-	game->map.height = 0;
-	game->player_y = 0;
-	game->player_x = 0;
-	game->check_e = 0;
-	game->mlx = NULL;
+	// game->moves = 0;
+	// game->e = 0;
+	// game->c = 0;
+	// game->p = 0;
+	// game->map.height = 0;
+	// game->player_y = 0;
+	// game->player_x = 0;
+	// game->check_e = 0;
+	// game->mlx = NULL;
 }
 
 int	main(int argc, char **argv)
 {
 	t_game	game;
 
+	ft_memset(&game, 0, sizeof(game));
 	if (argc == 2)
 	{
 		game_initializer(&game, argv);

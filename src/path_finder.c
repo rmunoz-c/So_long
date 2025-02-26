@@ -27,7 +27,7 @@ void	path_traveler(t_game *game, int x, int y)
 	else if (comp == 'E')
 	{
 		game->check_e -= 1;
-		game->map.copy[y][x] = '1';
+		return ;
 	}
 	else
 		return ;
@@ -42,11 +42,22 @@ void	path_finder(t_game *game)
 	game->check_c = game->c;
 	game->check_e = game->e;
 	player_pos(game);
+
+
 	path_traveler(game, game->player_x, game->player_y);
+
+	int i = 0;
+
+	while (game->map.copy[i])
+	{
+		printf("%s\n", game->map.copy[i]);
+		i++;
+	}
+	
 	if (game->check_c != 0 || game->check_e >= game->e)
 	{
 		ft_free_game(game->map.map, game->map.height);
 		ft_free_game(game->map.copy, game->map.height);
-		free_and_exit(game, "Error\n No valid path found!\n");
+		ft_error("Error\n No valid path found!\n", TRUE);
 	}
 }

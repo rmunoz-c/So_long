@@ -19,14 +19,13 @@ void	set_map_image(t_game *map)
 
 	x = IMG_W;
 	y = IMG_H;
-	map->background_img = mlx_xpm_file_to_image(map->mlx,
-			"src/textures/Background.xpm", &x, &y);
-	map->wall_img = mlx_xpm_file_to_image(map->mlx,
-			"src/textures/Wall.xpm", &x, &y);
-	map->collectible_img = mlx_xpm_file_to_image(map->mlx,
-			"src/textures/Broam.xpm", &x, &y);
-	map->exit_img = mlx_xpm_file_to_image(map->mlx,
-			"src/textures/Exit.xpm", &x, &y);
+	map->background_img = mlx_xpm_file_to_image(map->mlx, "src/textures/Background.xpm", &x, &y);
+	map->wall_img = mlx_xpm_file_to_image(map->mlx, "src/textures/Wall.xpm", &x, &y);
+	map->collectible_img = mlx_xpm_file_to_image(map->mlx, "src/textures/Broam.xpm", &x, &y);
+	map->exit_img = mlx_xpm_file_to_image(map->mlx, "src/textures/Exit.xpm", &x, &y);
+
+	if (!map->background_img || !map->wall_img || !map->collectible_img || !map->exit_img)
+		free_and_exit(map, "Error\n");
 	set_player_image(map);
 }
 
@@ -38,13 +37,16 @@ void	set_player_image(t_game *player)
 	x = IMG_W;
 	y = IMG_H;
 	player->player_img_down = mlx_xpm_file_to_image(player->mlx,
-			"src/textures/Dalinar_left.xpm", &x, &y);
+			"src/textures/Dalinar_left.xpm", &x, &y); //Proteger ya que esto devuelve algo en malloc
 	player->player_img_left = mlx_xpm_file_to_image(player->mlx,
-			"src/textures/Dalinar_left.xpm", &x, &y);
+			"src/textures/Dalinar_left.xpm", &x, &y); //Proteger ya que esto devuelve algo en malloc
 	player->player_img_up = mlx_xpm_file_to_image(player->mlx,
-			"src/textures/Dalinar_right.xpm", &x, &y);
+			"src/textures/Dalinar_right.xpm", &x, &y); //Proteger ya que esto devuelve algo en malloc
 	player->player_img_right = mlx_xpm_file_to_image(player->mlx,
-			"src/textures/Dalinar_right.xpm", &x, &y);
+			"src/textures/Dalinar_right.xpm", &x, &y); //Proteger ya que esto devuelve algo en malloc
+
+	if (!player->player_img_down || !player->player_img_left || !player->player_img_up || !player->player_img_right)
+		free_and_exit(player, "Error\n");
 }
 
 void	render_tile(t_game *game, int x, int y)

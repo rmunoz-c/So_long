@@ -42,18 +42,7 @@ void	path_finder(t_game *game)
 	game->check_c = game->c;
 	game->check_e = game->e;
 	player_pos(game);
-
-
 	path_traveler(game, game->player_x, game->player_y);
-
-	int i = 0;
-
-	while (game->map.copy[i])
-	{
-		printf("%s\n", game->map.copy[i]);
-		i++;
-	}
-	
 	if (game->check_c != 0 || game->check_e >= game->e)
 	{
 		ft_free_game(game->map.map, game->map.height);

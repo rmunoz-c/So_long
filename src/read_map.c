@@ -19,9 +19,9 @@ void	ft_exit_free(t_game *game)
 	if (game->map.copy)
 		ft_free_game(game->map.copy, game->map.height);
 	if (game->file)
-		free (game->file);
+		free(game->file);
 	if (game->line)
-		free (game->line);
+		free(game->line);
 	exit(EXIT_FAILURE);
 }
 

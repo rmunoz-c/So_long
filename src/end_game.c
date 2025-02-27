@@ -14,8 +14,8 @@
 
 int	ft_free_game(char **game, int i)
 {
-	while (i > 0)
-		free(game[--i]);
+	while (i >= 0)
+		free(game[i--]);
 	free(game);
 	return (0);
 }
@@ -34,6 +34,7 @@ int	close_game(t_game *game)
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
 	ft_free_game(game->map.map, game->map.height);
+	ft_free_game(game->map.copy, game->map.height);
 	exit(EXIT_SUCCESS);
 	return (0);
 }

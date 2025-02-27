@@ -25,7 +25,10 @@ void	is_rectangular(t_game *game)
 	{
 		x = ft_strlen(game->map.map[y]);
 		if (len != x)
+		{
+			game->map.height = y;
 			free_and_exit(game, "Error\n Map is not rectangular!\n");
+		}
 		y++;
 	}
 	game->map.width = len;
@@ -112,5 +115,4 @@ void	map_parse(t_game *game)
 	check_walls(game);
 	check_components(game);
 	path_finder(game);
-	ft_free_array(game->map.copy);
 }
